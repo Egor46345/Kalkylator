@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="button_1">#005FBA</color>
     <color name="button_2">#0055A6</color>
+    <color name="button_Second_Windows">#60005FBA</color>
 </resources>

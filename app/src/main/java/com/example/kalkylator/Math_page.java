@@ -10,12 +10,11 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class Math_page extends AppCompatActivity implements View.OnClickListener {
 
     TextView firstNumber;
     TextView secondNumber;
     TextView result;
-
     Button zero;
     Button one;
     Button two;
@@ -26,42 +25,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button seven;
     Button eight;
     Button nine;
-    Button plus;
-    Button minus;
-    Button multiply;
-    Button divide;
+    Button pow;
+    Button sqrt;
+    Button sin;
+    Button cos;
     Button clear;
     Button equals;
-    Button secondWindows;
+
+    Button firstWindows;
 
     String act;
     boolean fnum;
 
     Spinner spinner;
     String[] str_array;
-    int p = 0;
+    int p = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_math_page2);
 
         Bundle arguments = getIntent().getExtras();
-        p = arguments.getInt("num");
+        str_array = arguments.getStringArray("key");
 
         spinner = findViewById(R.id.spinner);
-        if(p == 0){
-            str_array = new String[10];
-            str_array[0] = "История";
-            for(int i=1; i< str_array.length;i++){
-                str_array[i]=" ";
-            }
-        }
-        else{
-            str_array = arguments.getStringArray("key1");
-        }
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_spinner_item, str_array);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(Math_page.this, android.R.layout.simple_spinner_item, str_array);
         spinner.setAdapter(adapter);
 
         act = "";
@@ -81,14 +70,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         seven = findViewById(R.id.seven);
         eight = findViewById(R.id.eight);
         nine = findViewById(R.id.nine);
-        plus = findViewById(R.id.plus);
-        minus = findViewById(R.id.minus);
-        multiply = findViewById(R.id.multiply);
-        divide = findViewById(R.id.divide);
+        pow = findViewById(R.id.pow);
+        sqrt = findViewById(R.id.sqrt);
+        sin = findViewById(R.id.sin);
+        cos = findViewById(R.id.cos);
         clear = findViewById(R.id.clear);
         equals = findViewById(R.id.equals);
 
-        secondWindows = findViewById(R.id.secondWindows);
+        firstWindows = findViewById(R.id.firstWindows);
 
         zero.setOnClickListener(this);
         one.setOnClickListener(this);
@@ -100,13 +89,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         seven.setOnClickListener(this);
         eight.setOnClickListener(this);
         nine.setOnClickListener(this);
-        plus.setOnClickListener(this);
-        minus.setOnClickListener(this);
-        multiply.setOnClickListener(this);
-        divide.setOnClickListener(this);
+        pow.setOnClickListener(this);
+        sqrt.setOnClickListener(this);
+        sin.setOnClickListener(this);
+        cos.setOnClickListener(this);
         clear.setOnClickListener(this);
         equals.setOnClickListener(this);
-        secondWindows.setOnClickListener(this);
+        firstWindows.setOnClickListener(this);
     }
 
     @Override
@@ -134,23 +123,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     secondNumber.setText(numText);
                 }
                 break;
-            case R.id.plus:
-            case R.id.minus:
-            case R.id.multiply:
-            case R.id.divide:
+            case R.id.pow:
+            case R.id.sqrt:
+            case R.id.sin:
+            case R.id.cos:
                 Button button1 = (Button) view;
                 act = button1.getText().toString();
                 fnum = !fnum;
                 break;
             case R.id.equals:
-                float num1 = Float.valueOf(firstNumber.getText().toString());
-                float num2 = Float.valueOf(secondNumber.getText().toString());
+                float num1;
+                if(firstNumber.getText().toString() == "") num1 = 0;
+                else num1 = Float.valueOf(firstNumber.getText().toString());
+                float num2;
+                if(secondNumber.getText().toString() == "") num2 = 0;
+                else num2 = Float.valueOf(secondNumber.getText().toString());
                 String[] str_array1 = new String[10];
                 switch (act) {
-                    case ("+"):
-                        float resPlus = num1 + num2;
-                        result.setText(String.valueOf(resPlus));
-                        str_array1[0] = String.valueOf(num1 + " + " + num2 + " = " + resPlus);
+                    case ("x^y"):
+                        double resPow = Math.pow(num1, num2);
+                        result.setText(String.valueOf(resPow));
+                        str_array1[0] = String.valueOf(num1 + "^" + num2 + " = " + resPow);
                         for(int i=0; i<9;i++){
                             str_array1[i+1] = str_array[i];
                         }
@@ -158,10 +151,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             str_array[i] = str_array1[i];
                         }
                         break;
-                    case ("-"):
-                        float resMinus = num1 - num2;
-                        result.setText(String.valueOf(resMinus));
-                        str_array1[0] = String.valueOf(num1 + " - " + num2 + " = " + resMinus);
+                    case ("√x"):
+                        double resSqrt = Math.pow(num1, (1/num2));
+                        result.setText(String.valueOf(resSqrt));
+                        str_array1[0] = String.valueOf(num2 + "√" + num1 + " = " + resSqrt);
                         for(int i=0; i<9;i++){
                             str_array1[i+1] = str_array[i];
                         }
@@ -169,10 +162,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             str_array[i] = str_array1[i];
                         }
                         break;
-                    case ("x"):
-                        float resMultiply = num1 * num2;
-                        result.setText(String.valueOf(resMultiply));
-                        str_array1[0] = String.valueOf(num1 + " * " + num2 + " = " + resMultiply);
+                    case ("sin"):
+                        double resSin = Math.sin(num1);
+                        result.setText(String.valueOf(resSin));
+                        str_array1[0] = String.valueOf("sin(" + num1 + ")" + " = " + resSin);
                         for(int i=0; i<9;i++){
                             str_array1[i+1] = str_array[i];
                         }
@@ -180,10 +173,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             str_array[i] = str_array1[i];
                         }
                         break;
-                    case ("/"):
-                        float resDivide = num1 / num2;
-                        result.setText(String.valueOf(resDivide));
-                        str_array1[0] = String.valueOf(num1 + " / " + num2 + " = " + resDivide);
+                    case ("cos"):
+                        double resCos = Math.cos(num1);
+                        result.setText(String.valueOf(resCos));
+                        str_array1[0] = String.valueOf("cos(" + num1 + ")" + " = " + resCos);
                         for(int i=0; i<9;i++){
                             str_array1[i+1] = str_array[i];
                         }
@@ -199,11 +192,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 result.setText("");
                 fnum = true;
                 break;
-            case R.id.secondWindows:
-                Intent intent = new Intent(MainActivity.this, Math_page.class);
+            case R.id.firstWindows:
+                Intent intent = new Intent(Math_page.this, MainActivity.class);
                 Bundle b = new Bundle();
-                b.putStringArray("key", str_array);
+                b.putStringArray("key1", str_array);
                 intent.putExtras(b);
+                intent.putExtra("num", p);
                 startActivity(intent);
                 break;
         }

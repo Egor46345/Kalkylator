@@ -16,4 +16,11 @@
     <string name="zero">0</string>
     <string name="multiply">x</string>
     <string name="divide">/</string>
+    <string name="pow">x^y</string>
+    <string name="sqrt">√x</string>
+    <string name="sin">sin</string>
+    <string name="cos">cos</string>
+    <string name="simple">простые операции</string>
+    <string name="difficult">сложные операции</string>
+    <string name="spinner_title">History</string>
 </resources>
