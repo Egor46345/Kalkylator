@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Kalkylator</string>
+    <string name="app_name">Калькулятор</string>
     <string name="seven">7</string>
     <string name="eight">8</string>
     <string name="nine">9</string>
@@ -11,7 +11,7 @@
     <string name="one">1</string>
     <string name="two">2</string>
     <string name="three">3</string>
-    <string name="minus">-</string>
+    <string name="minus">–</string>
     <string name="clear">C</string>
     <string name="zero">0</string>
     <string name="multiply">x</string>
@@ -22,5 +22,5 @@
     <string name="cos">cos</string>
     <string name="simple">простые операции</string>
     <string name="difficult">сложные операции</string>
-    <string name="spinner_title">History</string>
+    <string name="spinner_title">История</string>
 </resources>

@@ -39,29 +39,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     Spinner spinner;
     String[] str_array;
-    int p = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Bundle arguments = getIntent().getExtras();
-        p = arguments.getInt("num");
-
         spinner = findViewById(R.id.spinner);
-        if(p == 0){
-            str_array = new String[10];
-            str_array[0] = "История";
-            for(int i=1; i< str_array.length;i++){
-                str_array[i]=" ";
-            }
+        str_array = new String[10];
+        str_array[0] = "История";
+        for(int i=1; i< str_array.length; i++){
+            str_array[i]=" ";
         }
-        else{
-            str_array = arguments.getStringArray("key1");
-        }
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_spinner_item, str_array);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_spinner_item, str_array);
         spinner.setAdapter(adapter);
 
         act = "";
@@ -87,7 +77,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         divide = findViewById(R.id.divide);
         clear = findViewById(R.id.clear);
         equals = findViewById(R.id.equals);
-
         secondWindows = findViewById(R.id.secondWindows);
 
         zero.setOnClickListener(this);
@@ -143,53 +132,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 fnum = !fnum;
                 break;
             case R.id.equals:
-                float num1 = Float.valueOf(firstNumber.getText().toString());
-                float num2 = Float.valueOf(secondNumber.getText().toString());
+                float num1 = Float.parseFloat(firstNumber.getText().toString());
+                float num2 = Float.parseFloat(secondNumber.getText().toString());
                 String[] str_array1 = new String[10];
                 switch (act) {
                     case ("+"):
                         float resPlus = num1 + num2;
                         result.setText(String.valueOf(resPlus));
-                        str_array1[0] = String.valueOf(num1 + " + " + num2 + " = " + resPlus);
-                        for(int i=0; i<9;i++){
-                            str_array1[i+1] = str_array[i];
-                        }
-                        for(int i=0; i<str_array.length;i++){
-                            str_array[i] = str_array1[i];
-                        }
+                        str_array1[0] = num1 + " + " + num2 + " = " + resPlus;
+                        System.arraycopy(str_array, 0, str_array1, 1, 9);
+                        System.arraycopy(str_array1, 0, str_array, 0, str_array.length);
                         break;
                     case ("-"):
                         float resMinus = num1 - num2;
                         result.setText(String.valueOf(resMinus));
-                        str_array1[0] = String.valueOf(num1 + " - " + num2 + " = " + resMinus);
-                        for(int i=0; i<9;i++){
-                            str_array1[i+1] = str_array[i];
-                        }
-                        for(int i=0; i<str_array.length;i++){
-                            str_array[i] = str_array1[i];
-                        }
+                        str_array1[0] = num1 + " - " + num2 + " = " + resMinus;
+                        System.arraycopy(str_array, 0, str_array1, 1, 9);
+                        System.arraycopy(str_array1, 0, str_array, 0, str_array.length);
                         break;
                     case ("x"):
                         float resMultiply = num1 * num2;
                         result.setText(String.valueOf(resMultiply));
-                        str_array1[0] = String.valueOf(num1 + " * " + num2 + " = " + resMultiply);
-                        for(int i=0; i<9;i++){
-                            str_array1[i+1] = str_array[i];
-                        }
-                        for(int i=0; i<str_array.length;i++){
-                            str_array[i] = str_array1[i];
-                        }
+                        str_array1[0] = num1 + " * " + num2 + " = " + resMultiply;
+                        System.arraycopy(str_array, 0, str_array1, 1, 9);
+                        System.arraycopy(str_array1, 0, str_array, 0, str_array.length);
                         break;
                     case ("/"):
                         float resDivide = num1 / num2;
                         result.setText(String.valueOf(resDivide));
-                        str_array1[0] = String.valueOf(num1 + " / " + num2 + " = " + resDivide);
-                        for(int i=0; i<9;i++){
-                            str_array1[i+1] = str_array[i];
-                        }
-                        for(int i=0; i<str_array.length;i++){
-                            str_array[i] = str_array1[i];
-                        }
+                        str_array1[0] = num1 + " / " + num2 + " = " + resDivide;
+                        System.arraycopy(str_array, 0, str_array1, 1, 9);
+                        System.arraycopy(str_array1, 0, str_array, 0, str_array.length);
                         break;
                 }
                 break;

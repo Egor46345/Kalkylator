@@ -3,10 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Kalkylator/app/src/main/res/drawable/button_background.xml" value="0.2657407407407407" />
-        <entry key="..\:/Kalkylator/app/src/main/res/drawable/spinner_history.xml" value="0.2657407407407407" />
-        <entry key="..\:/Kalkylator/app/src/main/res/layout/activity_main.xml" value="0.27291666666666664" />
-        <entry key="..\:/Kalkylator/app/src/main/res/layout/activity_math_page2.xml" value="0.27291666666666664" />
+        <entry key="..\:/Kalkylator/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Kalkylator/app/src/main/res/layout/activity_math_page2.xml" value="0.25" />
       </map>
     </option>
   </component>

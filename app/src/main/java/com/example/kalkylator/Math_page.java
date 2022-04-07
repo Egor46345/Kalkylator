@@ -39,7 +39,6 @@ public class Math_page extends AppCompatActivity implements View.OnClickListener
 
     Spinner spinner;
     String[] str_array;
-    int p = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,9 +47,8 @@ public class Math_page extends AppCompatActivity implements View.OnClickListener
 
         Bundle arguments = getIntent().getExtras();
         str_array = arguments.getStringArray("key");
-
         spinner = findViewById(R.id.spinner);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(Math_page.this, android.R.layout.simple_spinner_item, str_array);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(Math_page.this, android.R.layout.simple_spinner_item, str_array);
         spinner.setAdapter(adapter);
 
         act = "";
@@ -133,56 +131,40 @@ public class Math_page extends AppCompatActivity implements View.OnClickListener
                 break;
             case R.id.equals:
                 float num1;
-                if(firstNumber.getText().toString() == "") num1 = 0;
-                else num1 = Float.valueOf(firstNumber.getText().toString());
+                if(firstNumber.getText().toString().equals("")) num1 = 0;
+                else num1 = Float.parseFloat(firstNumber.getText().toString());
                 float num2;
-                if(secondNumber.getText().toString() == "") num2 = 0;
-                else num2 = Float.valueOf(secondNumber.getText().toString());
+                if(secondNumber.getText().toString().equals("")) num2 = 0;
+                else num2 = Float.parseFloat(secondNumber.getText().toString());
                 String[] str_array1 = new String[10];
                 switch (act) {
                     case ("x^y"):
                         double resPow = Math.pow(num1, num2);
                         result.setText(String.valueOf(resPow));
-                        str_array1[0] = String.valueOf(num1 + "^" + num2 + " = " + resPow);
-                        for(int i=0; i<9;i++){
-                            str_array1[i+1] = str_array[i];
-                        }
-                        for(int i=0; i<str_array.length;i++){
-                            str_array[i] = str_array1[i];
-                        }
+                        str_array1[0] = num1 + "^" + num2 + " = " + resPow;
+                        System.arraycopy(str_array, 0, str_array1, 1, 9);
+                        System.arraycopy(str_array1, 0, str_array, 0, str_array.length);
                         break;
                     case ("√x"):
                         double resSqrt = Math.pow(num1, (1/num2));
                         result.setText(String.valueOf(resSqrt));
-                        str_array1[0] = String.valueOf(num2 + "√" + num1 + " = " + resSqrt);
-                        for(int i=0; i<9;i++){
-                            str_array1[i+1] = str_array[i];
-                        }
-                        for(int i=0; i<str_array.length;i++){
-                            str_array[i] = str_array1[i];
-                        }
+                        str_array1[0] = num2 + "√" + num1 + " = " + resSqrt;
+                        System.arraycopy(str_array, 0, str_array1, 1, 9);
+                        System.arraycopy(str_array1, 0, str_array, 0, str_array.length);
                         break;
                     case ("sin"):
                         double resSin = Math.sin(num1);
                         result.setText(String.valueOf(resSin));
-                        str_array1[0] = String.valueOf("sin(" + num1 + ")" + " = " + resSin);
-                        for(int i=0; i<9;i++){
-                            str_array1[i+1] = str_array[i];
-                        }
-                        for(int i=0; i<str_array.length;i++){
-                            str_array[i] = str_array1[i];
-                        }
+                        str_array1[0] = "sin(" + num1 + ")" + " = " + resSin;
+                        System.arraycopy(str_array, 0, str_array1, 1, 9);
+                        System.arraycopy(str_array1, 0, str_array, 0, str_array.length);
                         break;
                     case ("cos"):
                         double resCos = Math.cos(num1);
                         result.setText(String.valueOf(resCos));
-                        str_array1[0] = String.valueOf("cos(" + num1 + ")" + " = " + resCos);
-                        for(int i=0; i<9;i++){
-                            str_array1[i+1] = str_array[i];
-                        }
-                        for(int i=0; i<str_array.length;i++){
-                            str_array[i] = str_array1[i];
-                        }
+                        str_array1[0] = "cos(" + num1 + ")" + " = " + resCos;
+                        System.arraycopy(str_array, 0, str_array1, 1, 9);
+                        System.arraycopy(str_array1, 0, str_array, 0, str_array.length);
                         break;
                 }
                 break;
@@ -194,10 +176,6 @@ public class Math_page extends AppCompatActivity implements View.OnClickListener
                 break;
             case R.id.firstWindows:
                 Intent intent = new Intent(Math_page.this, MainActivity.class);
-                Bundle b = new Bundle();
-                b.putStringArray("key1", str_array);
-                intent.putExtras(b);
-                intent.putExtra("num", p);
                 startActivity(intent);
                 break;
         }
